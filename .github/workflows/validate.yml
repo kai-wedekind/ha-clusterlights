@@ -1,0 +1,42 @@
+name: Validate
+
+# HACS default inclusion requires both of these to pass, and hassfest is also the
+# cheapest way to catch a manifest that a new Home Assistant release has invalidated.
+# Weekly, because this repo can sit untouched for months while HA moves underneath it.
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "0 4 * * 1"
+  workflow_dispatch:
+
+jobs:
+  hassfest:
+    name: hassfest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: home-assistant/actions/hassfest@master
+
+  hacs:
+    name: HACS
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hacs/action@main
+        with:
+          category: integration
+          # `brands` is skipped ON PURPOSE, and only until the icon exists.
+          #
+          # HACS default inclusion needs an entry in home-assistant/brands
+          # (custom_integrations/clusterlights/icon.png at 256x256 plus icon@2x.png at
+          # 512x512). That is an asset, not code, so it cannot be produced here. Without
+          # this line the job fails on every push and on the weekly schedule, which trains
+          # everyone to ignore a red workflow -- and a check nobody reads is worse than no
+          # check, because the other eight are real.
+          #
+          # ⚠ DELETE THIS `ignore:` THE DAY THE BRANDS PR IS MERGED. Leaving it in means
+          # the one thing standing between this repo and HACS default listing is also the
+          # one thing CI no longer looks at.
+          ignore: brands
