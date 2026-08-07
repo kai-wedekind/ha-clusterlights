@@ -1,0 +1,17 @@
+{
+  "domain": "clusterlights",
+  "name": "Cluster Lights",
+  "bluetooth": [
+    {
+      "local_name": "LED-4-01-*"
+    }
+  ],
+  "codeowners": ["@kai-wedekind"],
+  "config_flow": true,
+  "dependencies": ["bluetooth_adapters"],
+  "documentation": "https://github.com/kai-wedekind/ha-clusterlights",
+  "iot_class": "assumed_state",
+  "issue_tracker": "https://github.com/kai-wedekind/ha-clusterlights/issues",
+  "requirements": [],
+  "version": "1.0.0"
+}

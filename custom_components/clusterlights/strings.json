@@ -1,0 +1,28 @@
+{
+  "config": {
+    "flow_title": "{name}",
+    "step": {
+      "user": {
+        "title": "Add a cluster light",
+        "description": "Pick a light Home Assistant has already heard, or enter its Bluetooth address by hand. These strings advertise only every 16-28 seconds, so an empty list usually means 'not heard yet' rather than 'not there'.",
+        "data": {
+          "address": "Bluetooth address",
+          "name": "Name"
+        }
+      },
+      "confirm": {
+        "title": "Add {name}",
+        "description": "Found {name} at {address}. Add it to Home Assistant?",
+        "data": {
+          "name": "Name"
+        }
+      }
+    },
+    "error": {
+      "invalid_address": "That is not a Bluetooth address. Expected six hex pairs separated by colons, for example AA:BB:CC:DD:EE:FF."
+    },
+    "abort": {
+      "already_configured": "This light is already set up."
+    }
+  }
+}
